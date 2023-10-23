@@ -11,6 +11,7 @@ using Blogifier.Storages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -111,9 +112,14 @@ app.UseStaticFiles();
 app.UseStorageStaticFiles();
 app.UseCookiePolicy();
 app.UseRouting();
-app.UseRequestLocalization(new RequestLocalizationOptions()
-  .AddSupportedCultures(BlogifierConstant.SupportedCultures)
-  .AddSupportedUICultures(BlogifierConstant.SupportedCultures));
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+  DefaultRequestCulture = new RequestCulture("vi-VN")
+}
+.AddSupportedCultures(BlogifierConstant.SupportedCultures)
+.AddSupportedUICultures(BlogifierConstant.SupportedCultures));
+
 app.UseCors(BlogifierConstant.PolicyCorsName);
 app.UseAuthentication();
 app.UseAuthorization();

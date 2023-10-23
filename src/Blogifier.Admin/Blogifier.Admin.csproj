@@ -8,13 +8,14 @@
     <ClientAssetsDirectory>assets\</ClientAssetsDirectory>
     <ClientAssetsRestoreCommand>npm i</ClientAssetsRestoreCommand>
     <ClientAssetsBuildCommand>npm run build:$(Configuration)</ClientAssetsBuildCommand>
+    <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.10" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.12" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.12" />
     <PackageReference Include="Sotsera.Blazor.Toaster" Version="3.0.0" />
   </ItemGroup>
 
@@ -41,6 +42,9 @@
     <ClientAssetsBuildOutput>$(ClientAssetsDirectory)\dist\</ClientAssetsBuildOutput>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Blogifier' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
   <ItemGroup>
     <ClientAssetsInputs Include="$(ClientAssetsDirectory)**" Exclude="$(DefaultItemExcludes)" />
     <ProjectCapability Include="ClientAssetsAlpha" />

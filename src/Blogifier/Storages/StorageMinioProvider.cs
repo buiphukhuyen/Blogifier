@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Minio;
 using Minio.DataModel;
+using Minio.DataModel.Args;
 using System;
 using System.IO;
 using System.Linq;
@@ -32,7 +33,7 @@ public class StorageMinioProvider : AppProvider<Storage, int>, IStorageProvider,
     _logger = logger;
     _mapper = mapper;
     _bucketName = section.GetValue<string>("BucketName")!;
-    _minioClient = new MinioClient()
+    _minioClient = (MinioClient?)new MinioClient()
      .WithEndpoint(section.GetValue<string>("Endpoint")!, section.GetValue<int>("Port"))
      .WithRegion(section.GetValue<string>("Region")!)
      .WithCredentials(section.GetValue<string>("AccessKey")!, section.GetValue<string>("SecretKey")!)

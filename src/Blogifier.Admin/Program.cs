@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Sotsera.Blazor.Toaster.Core.Models;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.Services.AddLocalization();
+
 builder.Services.AddOptions();
 
 builder.Services.AddAuthorizationCore(options =>
@@ -33,4 +36,11 @@ builder.Services.AddToaster(config =>
 builder.Services.AddScoped<ToasterService>();
 builder.Services.AddScoped<EditorJsInterop>();
 builder.Services.AddScoped<CommonJsInterop>();
-await builder.Build().RunAsync();
+
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("vi-VN");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("vi-VN");
+
+var app = builder.Build();
+
+await app.RunAsync();
+
